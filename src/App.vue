@@ -1,28 +1,36 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+     <TodoForm v-on:submitted="saveTask"></TodoForm>
+     <TodoList :todo-list="taskList"></TodoList>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import TodoForm from "@/components/TodoForm"
+import TodoList from "@/components/TodoList"
 export default {
-  name: 'app',
+  data() {
+    return {
+      taskList: []
+    }
+  },
   components: {
-    HelloWorld
+    TodoForm,
+    TodoList
+  },
+  methods: {
+    saveTask(task) {
+      this.taskList.push({
+        text: task,
+        todo: true
+      });
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+<style lang="scss">
+@import "@/assets/app.scss";
+
 </style>
